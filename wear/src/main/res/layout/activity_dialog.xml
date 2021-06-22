@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.wearable.view.BoxInsetLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="5dp"
+        app:layout_box="all">
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/dialog_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center_horizontal|top"
+            android:paddingBottom="15sp"
+            android:paddingTop="5sp"
+            android:text=""
+            android:textSize="15sp" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5sp">
+            <android.support.wearable.view.CircledImageView
+                android:id="@+id/dialog_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|bottom"
+                android:src="@drawable/ic_cc_clear"
+                app:circle_color="#AFAFAF"
+                app:circle_radius="25dp"
+                app:circle_radius_pressed="20dp"
+                android:onClick="no"/>
+            <android.support.wearable.view.CircledImageView
+                android:id="@+id/dialog_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|bottom"
+                android:src="@drawable/ic_cc_checkmark"
+                app:circle_color="#0EB695"
+                app:circle_radius="25dp"
+                app:circle_radius_pressed="20dp"
+                android:onClick="yes"/>
+        </FrameLayout>
+    </LinearLayout>
+</android.support.wearable.view.BoxInsetLayout>

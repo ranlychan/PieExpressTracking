@@ -1,0 +1,41 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId 'com.ranlychen.PieExpressTracking'
+        minSdkVersion 28
+        targetSdkVersion 29
+        versionCode 4
+        versionName '1.2.2'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'com.google.android.support:wearable:2.7.0'
+    implementation 'com.google.android.gms:play-services-wearable:17.0.0'
+    implementation 'androidx.percentlayout:percentlayout:1.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.wear:wear:1.0.0'
+    implementation files('E:\\Json\\json-lib-2.4-jdk15.jar')
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    //compile "com.ticwear:mobvoi-api:1.1.1"
+    //compile "com.ticwear:mobvoi-api-gms-china:1.0.3"
+    compileOnly 'com.google.android.wearable:wearable:2.7.0'
+    wearApp project(":wear")
+}

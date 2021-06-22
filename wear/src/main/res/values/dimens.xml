@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+    Because the window insets on round devices are larger than 15dp, this padding only applies
+    to square screens.
+    -->
+    <dimen name="box_inset_layout_padding">0dp</dimen>
+    <dimen name="round_button_height">80dp</dimen>
+    <dimen name="round_header_space">48dp</dimen>
+    <dimen name="round_footer_space">48dp</dimen>
+    <!--
+    This padding applies to both square and round screens. The total padding between the buttons
+    and the window insets is box_inset_layout_padding (above variable) on square screens and
+    inner_frame_layout_padding (below variable) on round screens.
+    -->
+    <dimen name="inner_frame_layout_padding">0dp</dimen>
+    <dimen name="aboutpage_text_padding">4dp</dimen>
+    <dimen name="aboutpage_content_padding">5dp</dimen>
+    <dimen name="aboutpage_icon">4dp</dimen>
+    <dimen name="aboutpage_icon_padding">4dp</dimen>
+    <dimen name="aboutpage_button_height">40dp</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">8dp</dimen>
+
+
+</resources>

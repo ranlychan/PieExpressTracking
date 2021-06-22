@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="item_name">
+        <item>示例备注</item>
+        <item>学习资料</item>
+        <item>苹果手机</item>
+        <item>一箱快乐水</item>
+    </string-array>
+
+    <string-array name="expNum">
+        <item>12345678901</item>
+        <item>27875897070</item>
+        <item>10245126432</item>
+        <item>23366666666</item>
+    </string-array>
+
+    <string-array name="expInfo">
+        <item>运输中 目前正在：广东省深圳市光明区顺丰服务点 扫件人：xxx</item>
+        <item>已拒收(2020.3.24)</item>
+        <item>已签收(2020.3.24)</item>
+        <item>等待揽件中</item>
+    </string-array>
+
+    <string-array name="expCode">
+        <item>SF</item>
+        <item>SF</item>
+        <item>SF</item>
+        <item>SF</item>
+    </string-array>
+
+    <integer-array name="comIcon">
+        <item>@drawable/com_sto</item>
+        <item>@drawable/com_sf</item>
+        <item>@drawable/com_yt</item>
+        <item>@drawable/com_zto</item>
+    </integer-array>
+
+</resources>

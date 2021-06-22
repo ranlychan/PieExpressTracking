@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">派查查</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="textview_item_name">名称：</string>
+    <string name="textview_item_No">运单号：</string>
+    <string name="textview_item_trace">轨迹：</string>
+    <string name="title_activity_main2">添加快递</string>
+    <string name="button_confirm_text">确认添加</string>
+    <string name="button_back_text">返回首页</string>
+    <string name="folderpath">/jsonInfo/</string>
+    <string name="filename">itemdata</string>
+    <string name="filename_expNo">expNos</string>
+    <string name="filetail">.json</string>
+    <string name="unNamedItem">未命名快递</string>
+    <string name="eggText">"恭喜你发现了一个彩蛋！但是并没有什么卵用OwO"</string>
+    <string name="deleteText">是否删除？</string>
+    <string name="unsupportedNo">作者太穷，目前仅支持圆通申通中通查询！请检查输入的运单号 :(</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="textview_item_state">状态：</string>
+    <string name="inputExpNo_digits">1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="button_cancel_text">取消添加</string>
+    <string name="addfail">添加失败</string>
+    <string name="addsuccess">添加成功</string>
+    <string name="aboutpage_qqgroup_info">交流群：1121768105</string>
+    <string name="UNKNOWNERROR">未知错误</string>
+    <string name="updatesuccess">更新成功！</string>
+    <string name="updatefail">更新失败！</string>
+    <string name="deletesuccess">删除成功！</string>
+    <string name="deletefail">删除失败！</string>
+    <string name="title_activity_main_pay">MainActivity_pay</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="aboutpage_button_backhome">返回首页</string>
+    <string name="aboutpage_button_pay">支持作者</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+</resources>
