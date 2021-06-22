@@ -10,9 +10,9 @@
 
 ## 项目概述 ##
 
-**运行环境：**Google WearOS 国内版
+**运行环境：** Google WearOS 国内版
 
-**软件类型：**快递查询工具
+**软件类型：** 快递查询工具
 
 **基本功能：**
 
@@ -22,7 +22,7 @@
 
 **运行截图：**
 
-**项目地址：**https://github.com/ranlychan/PieExpressTracking
+**项目地址：** https://github.com/ranlychan/PieExpressTracking
 
 
 ## 设计背景 ##
