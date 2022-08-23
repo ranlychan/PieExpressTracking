@@ -1,4 +1,4 @@
-package com.ranlychen.pieexpresstracking;
+package com.ranlychen.pieexpresstracking.view;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -11,6 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+
+import com.ranlychen.pieexpresstracking.utils.DataIOUtil;
+import com.ranlychen.pieexpresstracking.sdk.KdApiOrderDistinguish;
+import com.ranlychen.pieexpresstracking.utils.KdnJsonReaderUtil;
+import com.ranlychen.pieexpresstracking.sdk.KdniaoTrackQueryAPI;
+import com.ranlychen.pieexpresstracking.R;
 
 import org.json.JSONObject;
 
@@ -70,7 +76,7 @@ public class AddItemDialog extends Dialog implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.additemdialog);
+        setContentView(R.layout.dialog_add_item);
         bt_cancel=findViewById(R.id.dialog_bt_cancel);
         bt_confirm=findViewById(R.id.dialog_bt_confirm);
         inputNameText=findViewById(R.id.inputName);
@@ -126,8 +132,8 @@ public class AddItemDialog extends Dialog implements View.OnClickListener{
 
                 final KdApiOrderDistinguish odapi = new KdApiOrderDistinguish();
                 final KdniaoTrackQueryAPI tqapi = new KdniaoTrackQueryAPI();
-                final KdnJsonReader rh = new KdnJsonReader();
-                final DataIO io = new DataIO(context);
+                final KdnJsonReaderUtil rh = new KdnJsonReaderUtil();
+                final DataIOUtil io = new DataIOUtil(context);
 
                 /**
                  * 在Android4.0以后，只要是写在主线程（就是Activity）中的HTTP请求，运行时都会报错

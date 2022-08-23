@@ -1,9 +1,6 @@
-package com.ranlychen.pieexpresstracking;
+package com.ranlychen.pieexpresstracking.view;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.wearable.activity.WearableActivity;
@@ -11,6 +8,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.ranlychen.pieexpresstracking.R;
+import com.ranlychen.pieexpresstracking.utils.AppInfoUtil;
 
 public class AppInfoActivity extends WearableActivity {
     Intent home;
@@ -33,32 +33,13 @@ public class AppInfoActivity extends WearableActivity {
         wechatpay.setVisibility(View.GONE);
         alipay.setVisibility(View.GONE);
 
-        localversion.setText("版本号：" + getLocalVersion(this));
+        localversion.setText("版本号：" + AppInfoUtil.getLocalVersion(this));
     }
 
-    /**
-     * 方法名：getLocalVersion(Context context)
-     * 功    能：读取软件本地版本号(VersionName)
-     * 参    数：Context context
-     * 返回值：String localVersion
-     */
-    public static String getLocalVersion(Context context) {
-        String localVersion = "";
-        try {
-            PackageInfo packageInfo = context.getApplicationContext()
-                    .getPackageManager()
-                    .getPackageInfo(context.getPackageName(), 0);
-            localVersion = packageInfo.versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return localVersion;
-    }
-
-    public void backhome(View v) {
+    public void onBackHomeClick(View v) {
         finish();
     }
-    public void pay(View v) {
+    public void onPayClick(View v) {
         wechatpay.setVisibility(View.VISIBLE);
         alipay.setVisibility(View.VISIBLE);
     }
@@ -69,7 +50,7 @@ public class AppInfoActivity extends WearableActivity {
     private long[] mHits = new long[COUNTS];//记录点击次数
     private long DURATION = 2000;//有效时间
 
-    public void version(View v){
+    public void onVersionClick(View v){
 
         //将mHints数组内的所有元素左移一个位置
         System.arraycopy(mHits, 1, mHits, 0, mHits.length - 1);

@@ -1,4 +1,4 @@
-package com.ranlychen.pieexpresstracking;
+package com.ranlychen.pieexpresstracking.view;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -11,6 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+
+import com.ranlychen.pieexpresstracking.entity.KdnPackageItem;
+import com.ranlychen.pieexpresstracking.utils.DataIOUtil;
+import com.ranlychen.pieexpresstracking.utils.KdnJsonReaderUtil;
+import com.ranlychen.pieexpresstracking.sdk.KdniaoTrackQueryAPI;
+import com.ranlychen.pieexpresstracking.R;
 
 import org.json.JSONObject;
 
@@ -31,22 +37,22 @@ public class DetailDialog extends Dialog implements View.OnClickListener {
     private TextView tv_trace;
     private ImageButton bt_delete;
     private ImageButton bt_update;
-    private Item item;
+    private KdnPackageItem kdnPackageItem;
     private IOnCancelListener deleteListener;
     private IOnConfirmListener updateListener;
 
     //DetailDialog类的构造方法
-    public DetailDialog(@NonNull Context context, int position, Item item) {
+    public DetailDialog(@NonNull Context context, int position, KdnPackageItem kdnPackageItem) {
         super(context);
         this.context = context;
         this.index = position-1;
-        this.item = item;
+        this.kdnPackageItem = kdnPackageItem;
     }
-    public DetailDialog(@NonNull Context context, int themeResId, int position, Item item) {
+    public DetailDialog(@NonNull Context context, int themeResId, int position, KdnPackageItem kdnPackageItem) {
         super(context, themeResId);
         this.context = context;
         this.index = position-1;
-        this.item = item;
+        this.kdnPackageItem = kdnPackageItem;
     }
 
     public interface IOnCancelListener{
@@ -56,8 +62,8 @@ public class DetailDialog extends Dialog implements View.OnClickListener {
         void onUpdate(int state);
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setItem(KdnPackageItem kdnPackageItem) {
+        this.kdnPackageItem = kdnPackageItem;
     }
     public void setDelete(IOnCancelListener deleteListener) {
         this.deleteListener = deleteListener;
@@ -102,20 +108,20 @@ public class DetailDialog extends Dialog implements View.OnClickListener {
     };
 
     private void updateView(){
-        iv_logo.setImageResource(item.getIcon());
-        tv_name.setText(context.getString(R.string.textview_item_name)+item.getName());
-        tv_No.setText(context.getString(R.string.textview_item_No)+item.getLogisticCode());
-        tv_trace.setText(context.getString(R.string.textview_item_state)+item.getState()+"\n");
+        iv_logo.setImageResource(kdnPackageItem.getIcon());
+        tv_name.setText(context.getString(R.string.textview_item_name)+ kdnPackageItem.getName());
+        tv_No.setText(context.getString(R.string.textview_item_No)+ kdnPackageItem.getLogisticCode());
+        tv_trace.setText(context.getString(R.string.textview_item_state)+ kdnPackageItem.getState()+"\n");
 
-        if(item.getStateCode().equals("0")){
-            tv_trace.append("\n"+"原因："+item.getReason()+"\n");
+        if(kdnPackageItem.getStateCode().equals("0")){
+            tv_trace.append("\n"+"原因："+ kdnPackageItem.getReason()+"\n");
         }
         else{
-            for(int i = item.getTraces().length-1;i>0;i--){
-                tv_trace.append("\n"+"时间："+item.getTraces()[i][0]);
-                tv_trace.append("\n"+"地点："+item.getTraces()[i][1]+"\n");
-                if(!item.getTraces()[i][2].equals("")){
-                    tv_trace.append(""+"备注："+item.getTraces()[i][2]+"\n");
+            for(int i = kdnPackageItem.getTraces().length-1; i>0; i--){
+                tv_trace.append("\n"+"时间："+ kdnPackageItem.getTraces()[i][0]);
+                tv_trace.append("\n"+"地点："+ kdnPackageItem.getTraces()[i][1]+"\n");
+                if(!kdnPackageItem.getTraces()[i][2].equals("")){
+                    tv_trace.append(""+"备注："+ kdnPackageItem.getTraces()[i][2]+"\n");
                 }
             }
         }
@@ -126,7 +132,7 @@ public class DetailDialog extends Dialog implements View.OnClickListener {
     public void onClick(View view) {
 
         final String indexFilePath = context.getString(R.string.folderpath)+context.getString(R.string.filename_expNo)+context.getString(R.string.filetail);
-        final DataIO io = new DataIO(context);
+        final DataIOUtil io = new DataIOUtil(context);
 
         switch (view.getId()){
             case R.id.detail_bt_update:
@@ -142,12 +148,12 @@ public class DetailDialog extends Dialog implements View.OnClickListener {
                     public void run() {
                         Message msg = new Message();
                         try{
-                            String result = tqapi.getOrderTracesByJson(item.getShipperCode(), item.getLogisticCode());
+                            String result = tqapi.getOrderTracesByJson(kdnPackageItem.getShipperCode(), kdnPackageItem.getLogisticCode());
                             JSONObject newResult = new JSONObject(result);
-                            newResult.put("Name",item.getName());
+                            newResult.put("Name", kdnPackageItem.getName());
                             result = newResult.toString();
 
-                            if(io.saveToLocal(result, item.getLogisticCode()).equals("true") &&item.readJson(result)==null){
+                            if(io.saveToLocal(result, kdnPackageItem.getLogisticCode()).equals("true") && kdnPackageItem.readJson(result)==null){
                                 msg.what = UPDATECOMPLETED;
                                 updateListener.onUpdate(UPDATECOMPLETED);//更新成功
                             }
@@ -166,7 +172,7 @@ public class DetailDialog extends Dialog implements View.OnClickListener {
 
             case R.id.detail_bt_delete:
 
-                KdnJsonReader rh = new KdnJsonReader();
+                KdnJsonReaderUtil rh = new KdnJsonReaderUtil();
                 String indexFile =io.openJsonFile(indexFilePath);
                 if (indexFile == null||index==-1){
                     deleteListener.onDelete(UNKNOWNERR);

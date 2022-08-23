@@ -1,4 +1,7 @@
-package com.ranlychen.pieexpresstracking;
+package com.ranlychen.pieexpresstracking.entity;
+
+import com.ranlychen.pieexpresstracking.R;
+import com.ranlychen.pieexpresstracking.utils.JsonReader;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -6,7 +9,7 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
-public class Item implements Serializable,JsonReader {
+public class KdnPackageItem implements Serializable, JsonReader {
     private String Name;
     private int Icon;
     private String OrderCode;
@@ -19,14 +22,15 @@ public class Item implements Serializable,JsonReader {
     private String[][] TraceArr;
     //private JSONArray Traces;
 
+
     /**
     *get methods
      */
-    String getName(){
+    public String getName(){
         return Name;
     }
 
-    int getIcon(){
+    public int getIcon(){
         return  Icon;
     }
 
@@ -34,11 +38,11 @@ public class Item implements Serializable,JsonReader {
         return OrderCode;
     }
 
-    String getShipperCode(){
+    public String getShipperCode(){
         return ShipperCode;
     }
 
-    String getLogisticCode(){
+    public String getLogisticCode(){
         return LogisticCode;
     }
 
@@ -46,15 +50,15 @@ public class Item implements Serializable,JsonReader {
         return Success;
     }
 
-    String getReason(){
+    public String getReason(){
         return Reason;
     }
 
-    String getStateCode(){
+    public String getStateCode(){
         return State;
     }
 
-    String getState(){
+    public String getState(){
         String State_Str;
         switch(this.getStateCode()){
             case "2": State_Str = "运输中";break;
@@ -69,14 +73,14 @@ public class Item implements Serializable,JsonReader {
         return Remembered;
     }
 
-    String[][] getTraces(){
+    public String[][] getTraces(){
         return  TraceArr;
     }
 
     /**
      *set methods
      */
-    void setName(String Name){
+    public void setName(String Name){
        this.Name=Name;
     }
 
@@ -88,29 +92,29 @@ public class Item implements Serializable,JsonReader {
         this.OrderCode=OrderCode;
     }
 
-    void setShipperCode(String ShipperCode){
+    public void setShipperCode(String ShipperCode){
         this.ShipperCode=ShipperCode;
     }
 
-    void setLogisticCode(String LogisticCode){
+    public void setLogisticCode(String LogisticCode){
         this.LogisticCode=LogisticCode;
     }
 
-    void setSuccess(Boolean Success){
+    public void setSuccess(Boolean Success){
         this.Success=Success;
     }
 
-    void setReason(String Reason){
+    public void setReason(String Reason){
         this.Reason=Reason;
     }
 
-    void setStateCode(String State){
+    public void setStateCode(String State){
         this.State=State;
     }
 
     void setRemembered(Boolean Rembered){ this.Remembered =Rembered; }
 
-    void setTraceArr(String[][] TraceArr){
+    public void setTraceArr(String[][] TraceArr){
         this.TraceArr=TraceArr;
     }
 
@@ -126,7 +130,7 @@ public class Item implements Serializable,JsonReader {
         return newtrace;
     }
 
-    void linkIcon(String ShipperCode){
+    public void linkIcon(String ShipperCode){
         switch (ShipperCode){
             case "STO": this.setIcon(R.drawable.com_sto);
             break;
@@ -142,7 +146,7 @@ public class Item implements Serializable,JsonReader {
     JSONObject root;
 
     @Override
-    public Item readJson(String content) {
+    public KdnPackageItem readJson(String content) {
         String[][] traceArr;
         try {
             if(content != null){

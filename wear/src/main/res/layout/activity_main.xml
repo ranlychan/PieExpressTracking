@@ -6,15 +6,22 @@
     android:layout_height="match_parent"
     android:background="@color/dark_grey"
     android:padding="@dimen/box_inset_layout_padding"
-    tools:context=".MainActivity"
+    tools:context=".view.MainActivity"
     tools:deviceIds="wear">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_package_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/list_item" />
 
     <ListView
         android:id="@+id/list_test"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:scrollbars="none" />
+        android:scrollbars="none"
+        android:visibility="gone" />
 
 </RelativeLayout>
 

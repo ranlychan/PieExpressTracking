@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@android:style/Theme.DeviceDefault"
         android:usesCleartextTraffic="true">
-        <receiver android:name=".WidgetProvider">
+        <receiver android:name=".widget.WidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -37,11 +37,11 @@
             android:value="true" />
 
         <activity
-            android:name=".AppInfoActivity"
+            android:name=".view.AppInfoActivity"
             android:label="@string/title_activity_main2"
             android:launchMode="singleInstance" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleInstance">
             <intent-filter>

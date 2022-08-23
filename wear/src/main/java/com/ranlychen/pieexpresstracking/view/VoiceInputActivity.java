@@ -1,12 +1,12 @@
-package com.ranlychen.pieexpresstracking;
+package com.ranlychen.pieexpresstracking.view;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import com.mobvoi.android.speech.SpeechRecognitionApi;
 
-//ticwear的maven库失效了，这里会飘红，语音输入模块用不了了
 public class VoiceInputActivity extends SpeechRecognitionApi.SpeechRecogActivity {
     EditText editText;
 

@@ -1,7 +1,10 @@
-package com.ranlychen.pieexpresstracking;
+package com.ranlychen.pieexpresstracking.utils;
 
 import android.content.Context;
 import android.util.Log;
+
+import com.ranlychen.pieexpresstracking.R;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,12 +14,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
 
-public class DataIO {
+public class DataIOUtil {
 
     private static Log XLog;
     Context context;
 
-    DataIO (Context context){
+    public DataIOUtil(Context context){
         this.context = context;
     }
 
@@ -118,3 +121,4 @@ public class DataIO {
 
 
 }
+

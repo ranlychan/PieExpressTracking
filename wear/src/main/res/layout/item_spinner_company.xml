@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/iv_company_icon"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:visibility="gone"
+        tools:srcCompat="@drawable/com_zto" />
+
+    <TextView
+        android:id="@+id/tv_company_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_4"
+        android:textSize="18sp"
+        android:maxEms="6"
+        android:singleLine="true"
+        android:ellipsize="end"
+        tools:text="快递公司名称" />
+</LinearLayout>

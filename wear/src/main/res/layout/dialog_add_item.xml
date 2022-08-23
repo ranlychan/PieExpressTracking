@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/dark_grey"
     android:padding="@dimen/box_inset_layout_padding"
-    tools:context="com.ranlychen.pieexpresstracking.AppInfoActivity"
+    tools:context="com.ranlychen.pieexpresstracking.view.AppInfoActivity"
     tools:deviceIds="wear">
 
     <FrameLayout
@@ -81,16 +81,51 @@
                         app:circle_radius="20dp" />
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/dialog_bt_confirm"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/button_confirm_text" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/sp_company"
+                        android:layout_width="match_parent"
+                        android:layout_height="45sp"
+                        android:layout_weight="1"
+                        android:autofillHints="请选择快递公司"
+                        tools:listitem="@layout/item_spinner_company" />
+
+                    <EditText
+                        android:id="@+id/inputCompany"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:digits="@string/inputExpNo_digits"
+                        android:ems="7"
+                        android:hint="选择快递公司"
+                        android:inputType="textVisiblePassword"
+                        android:visibility="gone" />
+
+                    <android.support.wearable.view.CircledImageView
+                        android:id="@+id/dialog_bt_voice3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center_vertical"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_speak"
+                        android:visibility="gone"
+                        app:circle_radius="20dp" />
+                </LinearLayout>
+
                 <Button
                     android:id="@+id/dialog_bt_cancel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/button_cancel_text" />
+
+                <Button
+                    android:id="@+id/dialog_bt_confirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_confirm_text" />
 
             </LinearLayout>
         </ScrollView>

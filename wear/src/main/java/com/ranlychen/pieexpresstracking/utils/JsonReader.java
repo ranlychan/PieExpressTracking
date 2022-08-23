@@ -1,12 +1,14 @@
-package com.ranlychen.pieexpresstracking;
+package com.ranlychen.pieexpresstracking.utils;
+
+import com.ranlychen.pieexpresstracking.entity.KdnPackageItem;
 
 import org.json.JSONObject;
 
 public interface JsonReader {
     JSONObject root = null;
-    Item item = new Item();
+    KdnPackageItem KDN_PACKAGE_ITEM = new KdnPackageItem();
 
-    Item readJson(String content);
+    KdnPackageItem readJson(String content);
     String addNewJson(String JsonFileContent, String addNewString);
     String deleteJson(String JsonFileContent, int index);
     String updateJson(String JsonFileContent, String newJsonContent);

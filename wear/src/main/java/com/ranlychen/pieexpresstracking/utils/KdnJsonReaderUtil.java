@@ -1,13 +1,15 @@
-package com.ranlychen.pieexpresstracking;
+package com.ranlychen.pieexpresstracking.utils;
 
 
+
+import com.ranlychen.pieexpresstracking.entity.KdnPackageItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class KdnJsonReader implements JsonReader {
+public class KdnJsonReaderUtil implements JsonReader {
 
     JSONObject root;
 
@@ -44,25 +46,25 @@ public class KdnJsonReader implements JsonReader {
      * 方 法 名：readJson(String content)
      * 功    能：解析Json格式的字符串并把相应存储到item类里
      * 参    数：String content
-     * 返 回 值：Item item
+     * 返 回 值：KdnPackageItem KDN_PACKAGE_ITEM
      */
-    public Item readJson(String content) {
+    public KdnPackageItem readJson(String content) {
 
-        Item item = new Item();
+        KdnPackageItem kdnPackageItem = new KdnPackageItem();
         String[][] traceArr;
 
         try {
             if(content != null){
                 root = new JSONObject(content);
 
-                item.setName(root.optString("Name"));
-                item.setLogisticCode(root.getString("LogisticCode"));
-                item.setShipperCode(root.getString("ShipperCode"));
-                item.setSuccess(root.getBoolean("Success"));
-                item.setStateCode(root.getString("State"));
-                item.setReason(root.optString("Reason"));
-                item.linkIcon(root.getString("ShipperCode"));
-                //item.setTraceArr(root.getJSONArray("Traces"));
+                kdnPackageItem.setName(root.optString("Name"));
+                kdnPackageItem.setLogisticCode(root.getString("LogisticCode"));
+                kdnPackageItem.setShipperCode(root.getString("ShipperCode"));
+                kdnPackageItem.setSuccess(root.getBoolean("Success"));
+                kdnPackageItem.setStateCode(root.getString("State"));
+                kdnPackageItem.setReason(root.optString("Reason"));
+                kdnPackageItem.linkIcon(root.getString("ShipperCode"));
+                //KDN_PACKAGE_ITEM.setTraceArr(root.getJSONArray("Traces"));
 
 
                 /*unused_数组读取法*/
@@ -77,7 +79,7 @@ public class KdnJsonReader implements JsonReader {
                     traceArr[i][2] = trace.optString("Remark");
 
                 }
-                item.setTraceArr(traceArr);
+                kdnPackageItem.setTraceArr(traceArr);
 
             }//endif
 
@@ -85,7 +87,7 @@ public class KdnJsonReader implements JsonReader {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return item;
+        return kdnPackageItem;
 
     }
 

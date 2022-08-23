@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -8,11 +9,12 @@
 
     <!-- 显示快递公司图标 -->
     <ImageView
-        android:id="@+id/comIcon"
+        android:id="@+id/item_exp_icon"
         android:layout_width="68dp"
         android:layout_height="match_parent"
         android:baselineAlignBottom="true"
-        android:padding="4dp" />
+        android:padding="4dp"
+        tools:src="@drawable/com_zto" />
 
 
     <!-- 定义一个竖直方向的LinearLayout,显示文字信息 -->
@@ -23,35 +25,38 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/item_name"
             android:layout_width="match_parent"
             android:layout_height="18dp"
+            android:ellipsize="end"
             android:paddingLeft="5dp"
             android:singleLine="true"
-            android:ellipsize="end"
             android:textColor="#FFFFFF"
-            android:textSize="13dp" />
+            android:textSize="13dp"
+            tools:text="自定义物品备注名称自定义物品备注名称" />
 
         <TextView
-            android:id="@+id/expNum"
+            android:id="@+id/item_exp_num"
             android:layout_width="match_parent"
             android:layout_height="18dp"
+            android:ellipsize="end"
             android:paddingLeft="5dp"
             android:singleLine="true"
-            android:ellipsize="end"
             android:textColor="#FFFFFF"
-            android:textSize="13dp" />
+            android:textSize="13dp"
+            tools:text="123456789012345678901234567890" />
 
         <TextView
-            android:id="@+id/expInfo"
-            android:layout_width="wrap_content"
+            android:id="@+id/item_exp_info"
+            android:layout_width="match_parent"
             android:layout_height="36dp"
-            android:paddingLeft="5dp"
-            android:lines="2"
             android:ellipsize="end"
-            android:textColor="#FFFFFF"
             android:lineSpacingExtra="-6dp"
-            android:textSize="14dp" />
+            android:lines="2"
+            android:paddingLeft="5dp"
+            android:textColor="#FFFFFF"
+            android:textSize="14dp"
+            tools:text="2022/8/23 15:42\n快递送达信息快递送达信息" />
 
 
 

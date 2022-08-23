@@ -1,16 +1,15 @@
-package com.ranlychen.pieexpresstracking;
+package com.ranlychen.pieexpresstracking.view;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Display;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.TextView;
 import android.support.wearable.view.CircledImageView;
 import androidx.annotation.NonNull;
+
+import com.ranlychen.pieexpresstracking.R;
 
 public class CustomDialog extends Dialog implements View.OnClickListener {
 
