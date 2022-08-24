@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.wearable.view.BoxInsetLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_black_15">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <com.victor.loading.rotate.RotateLoading
+            android:id="@+id/rotate_loading"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:loading_width="5dp"
+            app:loading_color="#ffffff"/>
+
+    </FrameLayout>
+
+
+</android.support.wearable.view.BoxInsetLayout>

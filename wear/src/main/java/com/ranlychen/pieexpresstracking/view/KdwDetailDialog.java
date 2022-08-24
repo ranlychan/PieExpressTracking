@@ -15,11 +15,11 @@ import com.ranlychen.pieexpresstracking.R;
 import com.ranlychen.pieexpresstracking.entity.KdwRespBean;
 import com.ranlychen.pieexpresstracking.entity.KdwStatusEnum;
 import com.ranlychen.pieexpresstracking.entity.KdwTraceBean;
-import com.ranlychen.pieexpresstracking.entity.PiePackageItem;
+import com.ranlychen.pieexpresstracking.entity.PiePackageItemBean;
 import com.ranlychen.pieexpresstracking.factory.PackageCompanyIconFactory;
 import com.ranlychen.pieexpresstracking.network.AbsRxSubscriber;
+import com.ranlychen.pieexpresstracking.service.LocalPackageDataService;
 import com.ranlychen.pieexpresstracking.service.PackageService;
-import com.ranlychen.pieexpresstracking.utils.DataIOUtil;
 
 import java.util.List;
 
@@ -31,12 +31,12 @@ public class KdwDetailDialog extends Dialog implements View.OnClickListener {
     private TextView tv_trace;
     private ImageButton bt_delete;
     private ImageButton bt_update;
-    private PiePackageItem<KdwRespBean> item;
+    private PiePackageItemBean<KdwRespBean> item;
 
     private PackageCompanyIconFactory<KdwRespBean> iconFactory = new PackageCompanyIconFactory<>();
 
     //DetailDialog类的构造方法
-    public KdwDetailDialog(@NonNull Context context, PiePackageItem<KdwRespBean> item) {
+    public KdwDetailDialog(@NonNull Context context, PiePackageItemBean<KdwRespBean> item) {
         super(context);
         this.item = item;
     }
@@ -56,33 +56,58 @@ public class KdwDetailDialog extends Dialog implements View.OnClickListener {
         //为两个按钮添加点击事件
         bt_update.setOnClickListener(this);
         bt_delete.setOnClickListener(this);
+
+        initData(item);
     }
 
-    private void onUpdateSuccess(PiePackageItem<KdwRespBean> newItem){
-        iv_logo.setImageResource(iconFactory.getComIconResId(newItem));
-        tv_name.setText(String.format("%s%s", getContext().getString(R.string.textview_item_name), newItem.getMarkName()));
-        tv_No.setText(String.format("%s%s", getContext().getString(R.string.textview_item_No), newItem.getLogisticCode()));
-
-        KdwStatusEnum kdwStatusEnum = KdwStatusEnum.Companion.fromInt(newItem.getItem().getStatus());
-        String statusName = "未知状态";
-        if(kdwStatusEnum != null){
-            statusName = kdwStatusEnum.getStatusName();
-        }
-        tv_trace.setText(String.format("%s%s\n", getContext().getString(R.string.textview_item_state), statusName));
-        if(kdwStatusEnum == KdwStatusEnum.TRANSPORT_PROBLEM){
-            tv_trace.append(String.format("\n原因：%s\n", newItem.getItem().getReason()));
-        } else {
-            List<KdwTraceBean> traceBeanList = newItem.getItem().getData();
-            if(traceBeanList == null){
-                tv_trace.append("\n无轨迹信息\n");
-            } else {
-                for(KdwTraceBean traceBean: traceBeanList){
-                    tv_trace.append("\n"+"时间："+ traceBean.getTime());
-                    tv_trace.append("\n"+"地点："+ traceBean.getContext()+"\n");
+    private void initData(PiePackageItemBean<KdwRespBean> newItem){
+        iv_logo.post(new Runnable() {
+            @Override
+            public void run() {
+                iv_logo.setImageResource(iconFactory.getComIconResId(newItem));
+            }
+        });
+        tv_name.post(new Runnable() {
+            @Override
+            public void run() {
+                tv_name.setText(String.format("%s%s", getContext().getString(R.string.textview_item_name), newItem.getLocalInfoBean().getMarkName()));
+            }
+        });
+        tv_No.post(new Runnable() {
+            @Override
+            public void run() {
+                tv_No.setText(String.format("%s%s", getContext().getString(R.string.textview_item_No), newItem.getLocalInfoBean().getLogisticCode()));
+            }
+        });
+        tv_trace.post(new Runnable() {
+            @Override
+            public void run() {
+                KdwStatusEnum kdwStatusEnum = KdwStatusEnum.Companion.fromInt(newItem.getOnlineInfoBean().getStatus());
+                String statusName = "未知状态";
+                if(kdwStatusEnum != null){
+                    statusName = kdwStatusEnum.getStatusName();
+                }
+                tv_trace.setText(String.format("%s%s\n", getContext().getString(R.string.textview_item_state), statusName));
+                if(kdwStatusEnum == KdwStatusEnum.TRANSPORT_PROBLEM){
+                    tv_trace.append(String.format("\n原因：%s\n", newItem.getOnlineInfoBean().getReason()));
+                } else {
+                    List<KdwTraceBean> traceBeanList = newItem.getOnlineInfoBean().getData();
+                    if(traceBeanList == null){
+                        tv_trace.append("\n无轨迹信息\n");
+                    } else {
+                        for(KdwTraceBean traceBean: traceBeanList){
+                            tv_trace.append("\n"+"时间："+ traceBean.getTime());
+                            tv_trace.append("\n"+"地点："+ traceBean.getContext()+"\n");
+                        }
+                    }
                 }
             }
-        }
+        });
 
+    }
+
+    private void onUpdateSuccess(PiePackageItemBean<KdwRespBean> newItem){
+        initData(newItem);
     }
 
     //重写onClick方法
@@ -93,18 +118,38 @@ public class KdwDetailDialog extends Dialog implements View.OnClickListener {
                     ToastUtils.showShort("失败,请退出重进");
                     return;
                 }
-                PackageService.updatePackageDetail(item.getCompanyCode(), item.getLogisticCode(), new AbsRxSubscriber<PiePackageItem<KdwRespBean>>() {
-                    @Override
-                    public void onNext(PiePackageItem<KdwRespBean> kdwRespBeanPiePackageItem) {
-                        onUpdateSuccess(kdwRespBeanPiePackageItem);
-                    }
+                PackageService.queryPackageDetail(
+                        item.getLocalInfoBean().getMarkName(),
+                        item.getLocalInfoBean().getCompanyCode(),
+                        item.getLocalInfoBean().getLogisticCode(),
+                        new AbsRxSubscriber<PiePackageItemBean<KdwRespBean>>() {
+                            @Override
+                            public void onNext(PiePackageItemBean<KdwRespBean> kdwRespBeanPiePackageItemBean) {
 
-                    @Override
-                    public void onError(Throwable throwable) {
-                        super.onError(throwable);
-                        ToastUtils.showShort("更新失败");
-                    }
+                                LocalPackageDataService.updateKdwPackageData(item.getLocalInfoBean(), new AbsRxSubscriber<Boolean>() {
+                                    @Override
+                                    public void onNext(Boolean aBoolean) {
+                                        ToastUtils.showShort("更新成功");
+                                        onUpdateSuccess(item);
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable throwable) {
+                                        super.onError(throwable);
+                                        ToastUtils.showShort("本地信息更新失败");
+                                    }
+                                });
+
+                            }
+
+                            @Override
+                            public void onError(Throwable throwable) {
+                                super.onError(throwable);
+                                ToastUtils.showShort("联网查询失败");
+                            }
                 });
+
+
 
                 break;
 
@@ -113,7 +158,7 @@ public class KdwDetailDialog extends Dialog implements View.OnClickListener {
                     ToastUtils.showShort("失败,请退出重进");
                     return;
                 }
-                PackageService.deletePackageDetail(item.getLogisticCode(), new AbsRxSubscriber<Boolean>() {
+                LocalPackageDataService.deleteKdwPackageData(item.getLocalInfoBean(), new AbsRxSubscriber<Boolean>() {
                     @Override
                     public void onNext(Boolean aBoolean) {
                         ToastUtils.showShort("删除成功");

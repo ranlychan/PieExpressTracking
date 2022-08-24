@@ -9,9 +9,9 @@
 
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/iv_logo"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:src="@mipmap/ic_launcher_foreground"
-        android:onClick="logo"/>
+        android:onClick="onLogoClick"/>
 </LinearLayout>

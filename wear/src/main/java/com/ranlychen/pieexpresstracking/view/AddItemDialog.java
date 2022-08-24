@@ -5,18 +5,19 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.wearable.view.CircledImageView;
 import android.text.TextUtils;
-import android.text.method.ReplacementTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 
-import com.ranlychen.pieexpresstracking.utils.DataIOUtil;
-import com.ranlychen.pieexpresstracking.sdk.KdApiOrderDistinguish;
-import com.ranlychen.pieexpresstracking.utils.KdnJsonReaderUtil;
-import com.ranlychen.pieexpresstracking.sdk.KdniaoTrackQueryAPI;
 import com.ranlychen.pieexpresstracking.R;
+import com.ranlychen.pieexpresstracking.sdk.KdApiOrderDistinguish;
+import com.ranlychen.pieexpresstracking.sdk.KdniaoTrackQueryAPI;
+import com.ranlychen.pieexpresstracking.utils.DataIOUtil;
+import com.ranlychen.pieexpresstracking.utils.KdnJsonReaderUtil;
+import com.ranlychen.pieexpresstracking.utils.L2UReplacementTransformationMethod;
+import com.ranlychen.pieexpresstracking.utils.StringUtil;
 
 import org.json.JSONObject;
 
@@ -89,19 +90,7 @@ public class AddItemDialog extends Dialog implements View.OnClickListener{
 
 
         //小写字母显示成大写字母
-        inputExpNoText.setTransformationMethod(new ReplacementTransformationMethod() {
-            @Override
-            protected char[] getOriginal() {
-                char[] originalCharArr = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z' };
-                return originalCharArr;
-            }
-
-            @Override
-            protected char[] getReplacement() {
-                char[] replacementCharArr = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z' };
-                return replacementCharArr;
-            }
-        });
+        inputExpNoText.setTransformationMethod(new L2UReplacementTransformationMethod());
 
         //为两个按钮添加点击事件
         bt_confirm.setOnClickListener(this);
@@ -121,13 +110,13 @@ public class AddItemDialog extends Dialog implements View.OnClickListener{
                 break;
             case R.id.dialog_bt_confirm:
                 inputName = inputNameText.getText().toString().trim();
-                inputExpNo = convertString( inputExpNoText.getText().toString().trim());
+                inputExpNo = StringUtil.toUpperCase( inputExpNoText.getText().toString().trim());
 
                 //System.out.println("inputName:"+inputName);
                 //System.out.println("inputNo:"+inputExpNo.trim());
 
                 if(TextUtils.isEmpty(inputName)){
-                    inputName = context.getResources().getString((R.string.unNamedItem));
+                    inputName = context.getResources().getString((R.string.default_mark_name));
                 }
 
                 final KdApiOrderDistinguish odapi = new KdApiOrderDistinguish();
@@ -208,22 +197,6 @@ public class AddItemDialog extends Dialog implements View.OnClickListener{
                 dismiss();//按钮按之后会消失
                 break;
         }
-    }
-
-    /**
-     * 方 法 名：convertString(String str)
-     * 功    能：将传入的字符串中的小写字母转为大写字母
-     * 参    数：String str
-     * 返 回 值：String
-     */
-    public static String convertString(String str)
-    {
-        String upStr = str.toUpperCase();
-        StringBuffer buf = new StringBuffer(str.length());
-        for(int i=0;i<str.length();i++) {
-            buf.append(upStr.charAt(i));
-        }
-        return   buf.toString();
     }
 
     public void setEditViewText(int editViewName,String s){

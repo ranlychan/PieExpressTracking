@@ -5,16 +5,17 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.blankj.utilcode.util.GsonUtils;
 import com.ranlychen.pieexpresstracking.entity.KdwRespBean;
 import com.ranlychen.pieexpresstracking.entity.KdwTraceLineEnum;
-import com.ranlychen.pieexpresstracking.entity.PiePackageItem;
+import com.ranlychen.pieexpresstracking.entity.PiePackageItemBean;
+import com.ranlychen.pieexpresstracking.entity.PiePackageItemLocalStorageBean;
 import com.ranlychen.pieexpresstracking.network.AbsRxSubscriber;
 import com.ranlychen.pieexpresstracking.network.Api;
 import com.ranlychen.pieexpresstracking.network.RetrofitHolder;
 import com.ranlychen.pieexpresstracking.utils.KeyUtil;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import io.reactivex.disposables.Disposable;
@@ -37,7 +38,7 @@ public class PackageNetService {
      * @param order [desc|asc] 排序。desc：按时间由新到旧排列，asc：按时间由旧到新排列。不填默认desc（大小不敏感）
      * @param absRxSubscriber
      */
-    protected static Disposable getItemInfo(@NonNull String com, @NonNull String nu, KdwTraceLineEnum muti, String order, AbsRxSubscriber<PiePackageItem<KdwRespBean>> absRxSubscriber){
+    protected static Disposable getItemInfo(@NonNull String com, @NonNull String nu, KdwTraceLineEnum muti, String order, AbsRxSubscriber<PiePackageItemBean<KdwRespBean>> absRxSubscriber){
         Map<String, Object> param = new HashMap<>();
         param.put("id", KeyUtil.getKdwRequestId());
         param.put("com", com);
@@ -54,9 +55,18 @@ public class PackageNetService {
             public void onNext(KdwRespBean response) {
                 Log.i(TAG, "getItemInfo is success");
                 if (absRxSubscriber != null) {
-                    PiePackageItem<KdwRespBean> piePackageItem = new PiePackageItem<>();
-                    piePackageItem.setItem(response);
-                    absRxSubscriber.onNext(piePackageItem);
+                    PiePackageItemBean<KdwRespBean> piePackageItemBean = new PiePackageItemBean<>();
+                    PiePackageItemLocalStorageBean localStorageBean = new PiePackageItemLocalStorageBean();
+                    try {
+                        localStorageBean.setItemJson(GsonUtils.toJson(response));
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                    piePackageItemBean.setOnlineInfoBean(response);
+                    piePackageItemBean.setLocalInfoBean(localStorageBean);
+
+                    absRxSubscriber.onNext(piePackageItemBean);
                 }
             }
 

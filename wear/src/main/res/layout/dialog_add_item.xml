@@ -23,6 +23,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dp_40"
                 android:orientation="vertical" >
 
                 <TextView
@@ -115,17 +116,19 @@
                         app:circle_radius="20dp" />
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/dialog_bt_cancel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/button_cancel_text" />
 
                 <Button
                     android:id="@+id/dialog_bt_confirm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/green"
                     android:text="@string/button_confirm_text" />
+
+                <Button
+                    android:id="@+id/dialog_bt_cancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_cancel_text" />
 
             </LinearLayout>
         </ScrollView>

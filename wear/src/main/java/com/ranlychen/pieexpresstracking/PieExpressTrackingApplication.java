@@ -4,12 +4,18 @@ package com.ranlychen.pieexpresstracking;
 import android.app.Application;
 import android.content.Context;
 
+import com.dbflow5.config.FlowManager;
+
 public class PieExpressTrackingApplication extends Application {
 
     public static Context gContext;
+
     private static PieExpressTrackingApplication app;
 
     public static PieExpressTrackingApplication getInstance() {
+        if (app == null){
+            app = new PieExpressTrackingApplication();
+        }
         return app;
     }
 
@@ -22,11 +28,10 @@ public class PieExpressTrackingApplication extends Application {
         super.attachBaseContext(base);
     }
 
-
     @Override
     public void onCreate() {
         super.onCreate();
         gContext = getApplicationContext();
-        setInstance(this);
+        FlowManager.init(gContext);
     }
 }

@@ -33,8 +33,8 @@ object RetrofitHolder {
         val retrofit = Retrofit.Builder()
             .client(httpClientBuilder.build())
             .addConverterFactory(GsonConverterFactory.create(Gson()))
-//            //RxJava转换器
-//            .addCallAdapterFactory(RxCallAdapter())
+            //RxJava转换器
+            .addCallAdapterFactory(RxCallAdapter())
             .baseUrl(baseUrl)
             .build()
         return retrofit

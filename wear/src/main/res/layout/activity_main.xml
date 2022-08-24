@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/dark_grey"
-    android:padding="@dimen/box_inset_layout_padding"
-    tools:context=".view.MainActivity"
-    tools:deviceIds="wear">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_package_list"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/list_item" />
+        android:background="@color/dark_grey"
+        android:padding="@dimen/box_inset_layout_padding"
+        tools:context=".view.MainActivity"
+        tools:deviceIds="wear">
 
-    <ListView
-        android:id="@+id/list_test"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:scrollbars="none"
-        android:visibility="gone" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_package_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/list_item" />
 
-</RelativeLayout>
+        <ListView
+            android:id="@+id/list_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:scrollbars="none"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+</layout>
+
 

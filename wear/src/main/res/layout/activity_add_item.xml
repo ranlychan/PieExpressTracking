@@ -1,0 +1,139 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.wear.widget.BoxInsetLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dark_grey"
+        android:padding="@dimen/box_inset_layout_padding"
+        tools:context=".view.AddItemActivity"
+        tools:deviceIds="wear">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/inner_frame_layout_padding"
+            app:boxedEdges="left|right">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/dp_40"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/blue_a400"
+                        android:gravity="center"
+                        android:paddingVertical="5dp"
+                        android:text="@string/title_activity_main2" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/edt_mark_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="7"
+                            android:hint="输入自定义名称"
+                            android:inputType="textPersonName" />
+
+                        <android.support.wearable.view.CircledImageView
+                            android:id="@+id/civ_voice_mark_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center_vertical"
+                            android:src="@drawable/ic_speak"
+                            app:circle_radius="20dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/edt_exp_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:digits="@string/inputExpNo_digits"
+                            android:ems="7"
+                            android:hint="输入运单号"
+                            android:inputType="textVisiblePassword" />
+
+                        <android.support.wearable.view.CircledImageView
+                            android:id="@+id/civ_voice_exp_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_weight="1"
+                            android:src="@drawable/ic_speak"
+                            app:circle_radius="20dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <Spinner
+                            android:id="@+id/sp_company_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="45sp"
+                            android:layout_weight="1"
+                            android:autofillHints="请选择快递公司"
+                            android:entries="@array/ExpCompanyNames" />
+
+<!--                        <EditText-->
+<!--                            android:id="@+id/inputCompany"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:digits="@string/inputExpNo_digits"-->
+<!--                            android:ems="7"-->
+<!--                            android:hint="选择快递公司"-->
+<!--                            android:inputType="textVisiblePassword"-->
+<!--                            android:visibility="gone" />-->
+
+<!--                        <android.support.wearable.view.CircledImageView-->
+<!--                            android:id="@+id/dialog_bt_voice3"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="right|center_vertical"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:src="@drawable/ic_speak"-->
+<!--                            android:visibility="gone"-->
+<!--                            app:circle_radius="20dp" />-->
+                    </LinearLayout>
+
+
+                    <Button
+                        android:id="@+id/btn_confirm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/green"
+                        android:text="@string/button_confirm_text" />
+
+                    <Button
+                        android:id="@+id/btn_cancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/button_cancel_text" />
+
+                </LinearLayout>
+            </ScrollView>
+
+        </FrameLayout>
+    </androidx.wear.widget.BoxInsetLayout>
+</layout>

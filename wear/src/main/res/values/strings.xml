@@ -14,7 +14,7 @@
     <string name="filename">itemdata</string>
     <string name="filename_expNo">expNos</string>
     <string name="filetail">.json</string>
-    <string name="unNamedItem">未命名快递</string>
+    <string name="default_mark_name">未命名快递</string>
     <string name="eggText">"恭喜你发现了一个彩蛋！但是并没有什么卵用OwO"</string>
     <string name="deleteText">是否删除？</string>
     <string name="unsupportedNo">作者太穷，目前仅支持圆通申通中通查询！请检查输入的运单号 :(</string>

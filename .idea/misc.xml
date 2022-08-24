@@ -4,10 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/chencanyi/Documents/GitHub/PieExpressTracking/mobile/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/chencanyi/Documents/GitHub/PieExpressTracking/wear/src/main/res/drawable-nodpi/bg_radius_gray.xml" value="0.2055" />
+        <entry key="..\:/Users/chencanyi/Documents/GitHub/PieExpressTracking/wear/src/main/res/layout/activity_add_item.xml" value="0.9" />
+        <entry key="..\:/Users/chencanyi/Documents/GitHub/PieExpressTracking/wear/src/main/res/layout/activity_dialog.xml" value="0.6841004184100419" />
         <entry key="..\:/Users/chencanyi/Documents/GitHub/PieExpressTracking/wear/src/main/res/layout/activity_main.xml" value="0.6841004184100419" />
         <entry key="..\:/Users/chencanyi/Documents/GitHub/PieExpressTracking/wear/src/main/res/layout/additemdialog.xml" value="0.6841004184100419" />
-        <entry key="..\:/Users/chencanyi/Documents/GitHub/PieExpressTracking/wear/src/main/res/layout/dialog_add_item.xml" value="0.6841004184100419" />
+        <entry key="..\:/Users/chencanyi/Documents/GitHub/PieExpressTracking/wear/src/main/res/layout/dialog_add_item.xml" value="0.6681818181818182" />
         <entry key="..\:/Users/chencanyi/Documents/GitHub/PieExpressTracking/wear/src/main/res/layout/dialog_item_detail.xml" value="0.6841004184100419" />
+        <entry key="..\:/Users/chencanyi/Documents/GitHub/PieExpressTracking/wear/src/main/res/layout/dialog_waiting_lay.xml" value="0.6841004184100419" />
         <entry key="..\:/Users/chencanyi/Documents/GitHub/PieExpressTracking/wear/src/main/res/layout/item_spinner_company.xml" value="0.6841004184100419" />
         <entry key="..\:/Users/chencanyi/Documents/GitHub/PieExpressTracking/wear/src/main/res/layout/list_item.xml" value="0.6841004184100419" />
         <entry key="..\:/Users/chencanyi/Documents/GitHub/PieExpressTracking/wear/src/main/res/layout/view_footer.xml" value="0.6841004184100419" />

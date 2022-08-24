@@ -1,12 +1,10 @@
 package com.ranlychen.pieexpresstracking.entity
 
 /**快递网接口返回 www.kuaidi.com**/
-data class KdwRespBean(var success: Boolean?, var reason: String?, var data: List<KdwTraceBean>?, var status: Int?){
-    constructor() : this(null, null,null,null) {
-    }
+data class KdwRespBean(val success: Boolean, val reason: String, val data: List<KdwTraceBean>?, val status: Int){
 }
 
-data class KdwTraceBean(var time: String, var context: String)
+data class KdwTraceBean(val time: String, val context: String)
 
 enum class KdwTraceLineEnum(val traceLine: Int){
     MULTI_LINE(0),    //返回单行信息

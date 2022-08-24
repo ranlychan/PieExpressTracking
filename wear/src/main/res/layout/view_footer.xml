@@ -7,11 +7,11 @@
     android:gravity="center">
 
     <ImageButton
-        android:id="@+id/footadd"
+        android:id="@+id/ibtn_add"
         android:layout_width="match_parent"
         android:layout_height="@dimen/round_button_height"
         android:src="@drawable/ic_add_white_24dp"
-        android:onClick="footadd"/>
+        android:onClick="onAddBtnClick"/>
 
     <Space
         android:layout_width="match_parent"
