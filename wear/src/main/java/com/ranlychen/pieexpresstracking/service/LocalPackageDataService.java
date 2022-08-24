@@ -176,7 +176,7 @@ public class LocalPackageDataService {
 
     public static void deleteKdwPackageData(@NonNull PiePackageItemLocalStorageBean item, @NonNull AbsRxSubscriber<Boolean> absRxSubscriber){
         try {
-            item.delete(FlowManager.getDatabase(AppDataBase.class));
+            absRxSubscriber.onNext(item.delete(FlowManager.getDatabase(AppDataBase.class)));
         } catch (Exception e){
             absRxSubscriber.onError(e);
         }

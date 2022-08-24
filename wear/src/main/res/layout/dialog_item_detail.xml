@@ -54,15 +54,13 @@
                 android:id="@+id/detail_bt_update"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/round_button_height"
-                android:src="@android:drawable/ic_popup_sync"
-                android:onClick="update"/>
+                android:src="@android:drawable/ic_popup_sync"/>
 
             <ImageButton
                 android:id="@+id/detail_bt_delete"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/round_button_height"
-                android:src="@android:drawable/ic_menu_delete"
-                android:onClick="delete"/>
+                android:src="@android:drawable/ic_menu_delete"/>
 
             <Space
                 android:layout_width="match_parent"

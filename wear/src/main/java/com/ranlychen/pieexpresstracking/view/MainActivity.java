@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -18,14 +19,16 @@ import com.ranlychen.pieexpresstracking.entity.KdwRespBean;
 import com.ranlychen.pieexpresstracking.entity.PiePackageItemBean;
 import com.ranlychen.pieexpresstracking.network.AbsRxSubscriber;
 import com.ranlychen.pieexpresstracking.service.LocalPackageDataService;
-import com.ranlychen.pieexpresstracking.view.base.BaseBindingActivity;
+import com.ranlychen.pieexpresstracking.utils.Const;
+import com.ranlychen.pieexpresstracking.view.base.BaseLiteBindingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
+public class MainActivity extends BaseLiteBindingActivity<ActivityMainBinding> {
 
     private List<PiePackageItemBean<KdwRespBean>> packageList;
+
     private KdwPackageInfoAdapter packageListAdapter;
 
     @Override
@@ -42,7 +45,15 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         packageListAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                new KdwDetailDialog(MainActivity.this, packageList.get(position)).show();
+                new KdwDetailDialog(
+                        MainActivity.this,
+                        packageList.get(position),
+                        new NotifyItemChangedListener() {
+                            @Override
+                            public void notifyItemChanged() {
+                                initData();
+                            }
+                        }).show();
             }
         });
 
@@ -69,30 +80,27 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
     @Override
     public void initData() {
-        binding.rvPackageList.post(new Runnable() {
+        if(this.isFinishing() || this.isDestroyed()){
+            return;
+        }
+        LocalPackageDataService.queryAllKdwPackageDataList(new AbsRxSubscriber<List<PiePackageItemBean<KdwRespBean>>>() {
             @Override
-            public void run() {
-                LocalPackageDataService.queryAllKdwPackageDataList(new AbsRxSubscriber<List<PiePackageItemBean<KdwRespBean>>>() {
+            public void onNext(List<PiePackageItemBean<KdwRespBean>> piePackageItemBeans) {
+                packageList.clear();
+                packageList.addAll(piePackageItemBeans);
+                binding.rvPackageList.postDelayed(new Runnable() {
                     @Override
-                    public void onNext(List<PiePackageItemBean<KdwRespBean>> piePackageItemBeans) {
-                        ToastUtils.showLong("本地数据加载成功");
-                        packageList.clear();
-                        packageList.addAll(piePackageItemBeans);
-                        binding.rvPackageList.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                packageListAdapter.notifyDataSetChanged();
-                            }
-                        }, 500);
-
+                    public void run() {
+                        packageListAdapter.notifyDataSetChanged();
                     }
+                }, 500);
 
-                    @Override
-                    public void onError(Throwable throwable) {
-                        super.onError(throwable);
-                        ToastUtils.showLong("本地数据加载失败");
-                    }
-                });
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                super.onError(throwable);
+                ToastUtils.showLong("本地数据加载失败");
             }
         });
     }
@@ -103,12 +111,31 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
      */
     public void onAddBtnClick(View v) {
         Intent addItemPageIntent = new Intent(MainActivity.this, AddItemActivity.class);
-        startActivity(addItemPageIntent);
+        startActivityForResult(addItemPageIntent, Const.ACTIVITY_REQUEST_CODE.ITEM_ADD);
     }
 
 
     public void onLogoClick(View v) {
         Intent aboutPageIntent = new Intent(MainActivity.this, AppInfoActivity.class);
         startActivity(aboutPageIntent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //此处可以根据两个Code进行判断，本页面和结果页面跳过来的值
+        if (requestCode == Const.ACTIVITY_REQUEST_CODE.ITEM_ADD) {
+            if(resultCode == Const.ACTIVITY_RESULT_CODE.ITEM_ADD_SUCCESS){
+                initData();
+            } else if(resultCode == Const.ACTIVITY_RESULT_CODE.ITEM_ADD_FAIL){
+
+            } else if(resultCode == Const.ACTIVITY_RESULT_CODE.ITEM_ADD_CANCEL){
+
+            }
+        }
+    }
+
+    interface NotifyItemChangedListener{
+        void notifyItemChanged();
     }
 }

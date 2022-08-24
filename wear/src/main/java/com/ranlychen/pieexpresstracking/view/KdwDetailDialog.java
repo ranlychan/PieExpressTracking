@@ -33,12 +33,15 @@ public class KdwDetailDialog extends Dialog implements View.OnClickListener {
     private ImageButton bt_update;
     private PiePackageItemBean<KdwRespBean> item;
 
+    private MainActivity.NotifyItemChangedListener notifyItemChangedListener;
+
     private PackageCompanyIconFactory<KdwRespBean> iconFactory = new PackageCompanyIconFactory<>();
 
     //DetailDialog类的构造方法
-    public KdwDetailDialog(@NonNull Context context, PiePackageItemBean<KdwRespBean> item) {
+    public KdwDetailDialog(@NonNull Context context, PiePackageItemBean<KdwRespBean> item, MainActivity.NotifyItemChangedListener listener) {
         super(context);
         this.item = item;
+        this.notifyItemChangedListener = listener;
     }
 
     @Override
@@ -51,7 +54,6 @@ public class KdwDetailDialog extends Dialog implements View.OnClickListener {
         iv_logo = findViewById(R.id.detail_logo);
         bt_delete = findViewById(R.id.detail_bt_delete);
         bt_update = findViewById(R.id.detail_bt_update);
-
 
         //为两个按钮添加点击事件
         bt_update.setOnClickListener(this);
@@ -108,6 +110,7 @@ public class KdwDetailDialog extends Dialog implements View.OnClickListener {
 
     private void onUpdateSuccess(PiePackageItemBean<KdwRespBean> newItem){
         initData(newItem);
+        notifyItemChangedListener.notifyItemChanged();
     }
 
     //重写onClick方法
@@ -162,6 +165,7 @@ public class KdwDetailDialog extends Dialog implements View.OnClickListener {
                     @Override
                     public void onNext(Boolean aBoolean) {
                         ToastUtils.showShort("删除成功");
+                        notifyItemChangedListener.notifyItemChanged();
                         dismiss();
                     }
 

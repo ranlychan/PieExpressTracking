@@ -1,5 +1,7 @@
 package com.ranlychen.pieexpresstracking.view
 
+import android.content.Intent
+import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -13,6 +15,7 @@ import com.ranlychen.pieexpresstracking.entity.PiePackageItemBean
 import com.ranlychen.pieexpresstracking.network.AbsRxSubscriber
 import com.ranlychen.pieexpresstracking.service.LocalPackageDataService
 import com.ranlychen.pieexpresstracking.service.PackageService
+import com.ranlychen.pieexpresstracking.utils.Const
 import com.ranlychen.pieexpresstracking.utils.L2UReplacementTransformationMethod
 import com.ranlychen.pieexpresstracking.utils.StringUtil
 import com.ranlychen.pieexpresstracking.view.base.BaseBindingSpeechRecogActivity
@@ -75,12 +78,12 @@ class AddItemActivity : BaseBindingSpeechRecogActivity<ActivityAddItemBinding>()
 
                         LocalPackageDataService.saveKdwPackageData(item.localInfoBean, object : AbsRxSubscriber<Boolean>(){
                             override fun onNext(t: Boolean?) {
-                                ToastUtils.showLong("添加成功")
+                                addItemSuccess()
                             }
 
                             override fun onError(throwable: Throwable?) {
                                 super.onError(throwable)
-                                ToastUtils.showLong("本地缓存失败")
+                                addItemFailed("本地缓存失败")
                                 Log.d(TAG,throwable.toString())
                             }
                         })
@@ -88,20 +91,37 @@ class AddItemActivity : BaseBindingSpeechRecogActivity<ActivityAddItemBinding>()
 
                     override fun onError(throwable: Throwable) {
                         super.onError(throwable)
-                        ToastUtils.showLong("快递查询失败")
+                        addItemFailed("快递查询失败")
                     }
                 })
 
         } catch (e: Exception) {
             e.printStackTrace()
-            ToastUtils.showLong("添加失败")
         }
         dismiss()
     }
 
+    private fun addItemSuccess(){
+        val intent: Intent = Intent()
+        val bundle: Bundle  = Bundle()
+//        bundle.putString("result", "data")
+        setResult(Const.ACTIVITY_RESULT_CODE.ITEM_ADD_SUCCESS, intent.putExtras(bundle))
+        finish()
+        ToastUtils.showLong("添加成功")
+    }
+
+    private fun addItemFailed(reason: String){
+        val intent: Intent = Intent()
+        val bundle: Bundle  = Bundle()
+//        bundle.putString("result", "data")
+        setResult(Const.ACTIVITY_RESULT_CODE.ITEM_ADD_FAIL, intent.putExtras(bundle))
+        finish()
+        ToastUtils.showLong("添加失败:$reason")
+    }
+
     private fun onCancelClick(view: View) {
+        finish()
         ToastUtils.showShort("已取消添加")
-        dismiss()
     }
 
     private fun onVoiceInputMarkNameClick(view: View) {

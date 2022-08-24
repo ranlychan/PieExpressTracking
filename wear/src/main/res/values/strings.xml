@@ -8,6 +8,8 @@
     <string name="textview_item_No">运单号：</string>
     <string name="textview_item_trace">轨迹：</string>
     <string name="title_activity_main2">添加快递</string>
+    <string name="title_activity_app_info">应用信息</string>
+    <string name="title_activity_add_item">应用信息</string>
     <string name="button_confirm_text">确认添加</string>
     <string name="button_back_text">返回首页</string>
     <string name="folderpath">/jsonInfo/</string>

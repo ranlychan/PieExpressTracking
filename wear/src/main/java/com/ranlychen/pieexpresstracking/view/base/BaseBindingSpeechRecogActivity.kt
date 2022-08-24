@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.databinding.ViewDataBinding
 import com.mobvoi.android.speech.SpeechRecognitionApi
 
-abstract class BaseBindingSpeechRecogActivity<T : ViewDataBinding> : BaseBindingActivity<T>(){
+abstract class BaseBindingSpeechRecogActivity<T : ViewDataBinding> : BaseLiteBindingActivity<T>(){
 
     val DEFAULT_REQUEST_CODE = 57
 

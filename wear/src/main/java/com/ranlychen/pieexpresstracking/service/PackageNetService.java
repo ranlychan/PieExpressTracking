@@ -1,11 +1,13 @@
 package com.ranlychen.pieexpresstracking.service;
 
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.blankj.utilcode.util.GsonUtils;
+import com.ranlychen.pieexpresstracking.entity.KdwQueryFailException;
 import com.ranlychen.pieexpresstracking.entity.KdwRespBean;
 import com.ranlychen.pieexpresstracking.entity.KdwTraceLineEnum;
 import com.ranlychen.pieexpresstracking.entity.PiePackageItemBean;
@@ -54,20 +56,29 @@ public class PackageNetService {
             @Override
             public void onNext(KdwRespBean response) {
                 Log.i(TAG, "getItemInfo is success");
-                if (absRxSubscriber != null) {
-                    PiePackageItemBean<KdwRespBean> piePackageItemBean = new PiePackageItemBean<>();
-                    PiePackageItemLocalStorageBean localStorageBean = new PiePackageItemLocalStorageBean();
-                    try {
-                        localStorageBean.setItemJson(GsonUtils.toJson(response));
-                    } catch (Exception e){
-                        e.printStackTrace();
+                if(response.getSuccess()){
+                    if (absRxSubscriber != null) {
+                        PiePackageItemBean<KdwRespBean> piePackageItemBean = new PiePackageItemBean<>();
+                        PiePackageItemLocalStorageBean localStorageBean = new PiePackageItemLocalStorageBean();
+                        try {
+                            localStorageBean.setItemJson(GsonUtils.toJson(response));
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+                        piePackageItemBean.setOnlineInfoBean(response);
+                        piePackageItemBean.setLocalInfoBean(localStorageBean);
+
+                        absRxSubscriber.onNext(piePackageItemBean);
                     }
-
-                    piePackageItemBean.setOnlineInfoBean(response);
-                    piePackageItemBean.setLocalInfoBean(localStorageBean);
-
-                    absRxSubscriber.onNext(piePackageItemBean);
+                } else {
+                    String reason = "";
+                    if(!TextUtils.isEmpty(response.getReason())){
+                        reason = response.getReason();
+                    }
+                    absRxSubscriber.onError(new KdwQueryFailException(reason));
                 }
+
             }
 
             @Override
