@@ -1,38 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="item_name">
-        <kdnPackageItem>示例备注</kdnPackageItem>
-        <kdnPackageItem>学习资料</kdnPackageItem>
-        <kdnPackageItem>苹果手机</kdnPackageItem>
-        <kdnPackageItem>一箱快乐水</kdnPackageItem>
+        <item>示例备注</item>
+        <item>学习资料</item>
+        <item>苹果手机</item>
+        <item>一箱快乐水</item>
     </string-array>
 
     <string-array name="expNum">
-        <kdnPackageItem>12345678901</kdnPackageItem>
-        <kdnPackageItem>27875897070</kdnPackageItem>
-        <kdnPackageItem>10245126432</kdnPackageItem>
-        <kdnPackageItem>23366666666</kdnPackageItem>
+        <item>12345678901</item>
+        <item>27875897070</item>
+        <item>10245126432</item>
+        <item>23366666666</item>
     </string-array>
 
     <string-array name="expInfo">
-        <kdnPackageItem>运输中 目前正在：广东省深圳市光明区顺丰服务点 扫件人：xxx</kdnPackageItem>
-        <kdnPackageItem>已拒收(2020.3.24)</kdnPackageItem>
-        <kdnPackageItem>已签收(2020.3.24)</kdnPackageItem>
-        <kdnPackageItem>等待揽件中</kdnPackageItem>
+        <item>运输中 目前正在：广东省深圳市光明区顺丰服务点 扫件人：xxx</item>
+        <item>已拒收(2020.3.24)</item>
+        <item>已签收(2020.3.24)</item>
+        <item>等待揽件中</item>
     </string-array>
 
     <string-array name="expCode">
-        <kdnPackageItem>SF</kdnPackageItem>
-        <kdnPackageItem>SF</kdnPackageItem>
-        <kdnPackageItem>SF</kdnPackageItem>
-        <kdnPackageItem>SF</kdnPackageItem>
+        <item>SF</item>
+        <item>SF</item>
+        <item>SF</item>
+        <item>SF</item>
     </string-array>
 
     <integer-array name="comIcon">
-        <kdnPackageItem>@drawable/com_sto</kdnPackageItem>
-        <kdnPackageItem>@drawable/com_sf</kdnPackageItem>
-        <kdnPackageItem>@drawable/com_yt</kdnPackageItem>
-        <kdnPackageItem>@drawable/com_zto</kdnPackageItem>
+        <item>@drawable/com_sto</item>
+        <item>@drawable/com_sf</item>
+        <item>@drawable/com_yto</item>
+        <item>@drawable/com_zto</item>
     </integer-array>
+
+    <string-array name="ExpCompanyNames">
+        <item>京东快递</item>
+        <item>中通快递</item>
+        <item>申通快递</item>
+        <item>顺丰速运</item>
+        <item>天天快递</item>
+        <item>圆通快递</item>
+        <item>韵达快运</item>
+        <item>EMS快递</item>
+        <item>运通快递</item>
+        <item>邮政国内</item>
+        <item>百世汇通快递</item>
+        <item>邮政国际</item>
+        <item>AAE快递</item>
+        <item>Aramex快递</item>
+        <item>安能物流快递</item>
+        <item>EMS国际</item>
+        <item>FedEx（国际）</item>
+        <item>联邦快递</item>
+    </string-array>
 
 </resources>

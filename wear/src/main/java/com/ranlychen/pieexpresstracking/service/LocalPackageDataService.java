@@ -52,23 +52,34 @@ public class LocalPackageDataService {
     }
 
     public static void getKdwPackageNumList(@NonNull AbsRxSubscriber<KdwNumberList> absRxSubscriber){
-        try {
-            JsonObjectPreferenceUtil<KdwNumberList> kdwPackageDataList = new JsonObjectPreferenceUtil<KdwNumberList>(new KdwNumberList(), KDW_PACKAGE_NUMBER_LIST_KEY){};
-            KdwNumberList kdwNumberList = kdwPackageDataList.get();
-            absRxSubscriber.onNext(kdwNumberList);
-        } catch (Exception e){
-            absRxSubscriber.onError(e);
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JsonObjectPreferenceUtil<KdwNumberList> kdwPackageDataList = new JsonObjectPreferenceUtil<KdwNumberList>(new KdwNumberList(), KDW_PACKAGE_NUMBER_LIST_KEY){};
+                    KdwNumberList kdwNumberList = kdwPackageDataList.get();
+                    absRxSubscriber.onNext(kdwNumberList);
+                } catch (Exception e){
+                    absRxSubscriber.onError(e);
+                }
+            }
+        }).start();
     }
 
     public static void getKdwPackageData(@NonNull String number, @NonNull AbsRxSubscriber<PiePackageItem<KdwRespBean>> absRxSubscriber){
-        try {
-            JsonObjectPreferenceUtil<PiePackageItem<KdwRespBean>> kdwPackageData = new JsonObjectPreferenceUtil<PiePackageItem<KdwRespBean>>(new PiePackageItem<KdwRespBean>(), number){};
-            PiePackageItem<KdwRespBean> kdwRespBean = kdwPackageData.get();
-            absRxSubscriber.onNext(kdwRespBean);
-        } catch (Exception e){
-            absRxSubscriber.onError(e);
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JsonObjectPreferenceUtil<PiePackageItem<KdwRespBean>> kdwPackageData = new JsonObjectPreferenceUtil<PiePackageItem<KdwRespBean>>(new PiePackageItem<KdwRespBean>(), number){};
+                    PiePackageItem<KdwRespBean> kdwRespBean = kdwPackageData.get();
+                    absRxSubscriber.onNext(kdwRespBean);
+                } catch (Exception e){
+                    absRxSubscriber.onError(e);
+                }
+            }
+        }).start();
+
     }
 
     public static void saveKdwPackageData(@NonNull String number, @NonNull PiePackageItem<KdwRespBean> kdwRespBean, @NonNull AbsRxSubscriber<PiePackageItem<KdwRespBean>> absRxSubscriber){

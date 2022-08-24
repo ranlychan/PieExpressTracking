@@ -92,7 +92,7 @@
                         android:layout_height="45sp"
                         android:layout_weight="1"
                         android:autofillHints="请选择快递公司"
-                        tools:listitem="@layout/item_spinner_company" />
+                        android:entries="@array/ExpCompanyNames" />
 
                     <EditText
                         android:id="@+id/inputCompany"

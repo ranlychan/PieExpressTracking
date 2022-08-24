@@ -1,8 +1,5 @@
 package com.ranlychen.pieexpresstracking.entity
 
-import java.lang.reflect.Type
-import java.time.chrono.JapaneseEra.values
-
 /**快递网接口返回 www.kuaidi.com**/
 data class KdwRespBean(var success: Boolean?, var reason: String?, var data: List<KdwTraceBean>?, var status: Int?){
     constructor() : this(null, null,null,null) {
@@ -47,4 +44,5 @@ enum class KdwStatusEnum(val statusCode: Int, val statusName: String, val explan
 
 open class EnumCompanion<T, V>(private val valueMap: Map<T, V>) {
     fun fromInt(type: T) = valueMap[type]
+    fun fromString(type: T) =valueMap[type]
 }

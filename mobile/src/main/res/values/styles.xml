@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <kdnPackageItem name="colorPrimary">@color/colorPrimary</kdnPackageItem>
-        <kdnPackageItem name="colorPrimaryDark">@color/colorPrimaryDark</kdnPackageItem>
-        <kdnPackageItem name="colorAccent">@color/colorAccent</kdnPackageItem>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
 </resources>

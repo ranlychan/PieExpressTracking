@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/chencanyi/Documents/GitHub/PieExpressTracking/mobile/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/chencanyi/Documents/GitHub/PieExpressTracking/wear/src/main/res/layout/activity_main.xml" value="0.6841004184100419" />
         <entry key="..\:/Users/chencanyi/Documents/GitHub/PieExpressTracking/wear/src/main/res/layout/additemdialog.xml" value="0.6841004184100419" />
         <entry key="..\:/Users/chencanyi/Documents/GitHub/PieExpressTracking/wear/src/main/res/layout/dialog_add_item.xml" value="0.6841004184100419" />
@@ -11,6 +12,7 @@
         <entry key="..\:/Users/chencanyi/Documents/GitHub/PieExpressTracking/wear/src/main/res/layout/list_item.xml" value="0.6841004184100419" />
         <entry key="..\:/Users/chencanyi/Documents/GitHub/PieExpressTracking/wear/src/main/res/layout/view_footer.xml" value="0.6841004184100419" />
         <entry key="..\:/Users/chencanyi/Documents/GitHub/PieExpressTracking/wear/src/main/res/layout/view_header.xml" value="0.6841004184100419" />
+        <entry key="..\:/Users/chencanyi/Documents/GitHub/PieExpressTracking/wear/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1835" />
       </map>
     </option>
   </component>

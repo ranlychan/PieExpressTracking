@@ -225,6 +225,7 @@ public class AddItemDialog extends Dialog implements View.OnClickListener{
         }
         return   buf.toString();
     }
+
     public void setEditViewText(int editViewName,String s){
         switch (editViewName){
             case NAME: inputNameText.setText(s);break;

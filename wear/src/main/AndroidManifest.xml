@@ -14,7 +14,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.DeviceDefault"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:name=".PieExpressTrackingApplication">
         <receiver android:name=".widget.WidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

@@ -38,7 +38,7 @@ public class BaseSpeechActivity extends SpeechRecognitionApi.SpeechRecogActivity
     public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
         View view = super.onCreateView(name, context, attrs);
         bindView();
-        onViewBound();
+//        onViewBound();
         return view;
     }
 
@@ -50,7 +50,7 @@ public class BaseSpeechActivity extends SpeechRecognitionApi.SpeechRecogActivity
     @Override
     protected void onResume() {
         super.onResume();
-        initData();
+//        initData();
     }
 
     protected void bindView(){

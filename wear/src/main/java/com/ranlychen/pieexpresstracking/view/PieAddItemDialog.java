@@ -7,7 +7,6 @@ import android.support.wearable.view.CircledImageView;
 import android.text.TextUtils;
 import android.text.method.ReplacementTransformationMethod;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -20,17 +19,7 @@ import com.ranlychen.pieexpresstracking.entity.KdwExpCompanyEnum;
 import com.ranlychen.pieexpresstracking.entity.KdwRespBean;
 import com.ranlychen.pieexpresstracking.entity.PiePackageItem;
 import com.ranlychen.pieexpresstracking.network.AbsRxSubscriber;
-import com.ranlychen.pieexpresstracking.sdk.KdApiOrderDistinguish;
-import com.ranlychen.pieexpresstracking.sdk.KdniaoTrackQueryAPI;
 import com.ranlychen.pieexpresstracking.service.PackageService;
-import com.ranlychen.pieexpresstracking.utils.DataIOUtil;
-import com.ranlychen.pieexpresstracking.utils.KdnJsonReaderUtil;
-
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class PieAddItemDialog extends Dialog implements View.OnClickListener{
 
@@ -46,6 +35,7 @@ public class PieAddItemDialog extends Dialog implements View.OnClickListener{
     public interface IOnCancelListener{
         void onCancel(PieAddItemDialog dialog);
     }
+
     public interface IOnConfirmListener{
         void onConfirm(boolean isSuccess);
     }
@@ -54,21 +44,24 @@ public class PieAddItemDialog extends Dialog implements View.OnClickListener{
     public void setCancel(IOnCancelListener cancelListener) {
         this.cancelListener = cancelListener;
     }
+
     public void setConfirm(IOnConfirmListener confirmListener){
         this.confirmListener = confirmListener;
     }
+
     public void setVoiceListenerForName(View.OnClickListener voiceListener){
         this.voiceListenerForName = voiceListener;
     }
+
     public void setVoiceListenerForNo(View.OnClickListener voiceListener){
         this.voiceListenerForNo = voiceListener;
     }
-
 
     //AddItemDialog类的构造方法
     public PieAddItemDialog(@NonNull Context context) {
         super(context);
     }
+
     public PieAddItemDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
     }
@@ -77,6 +70,7 @@ public class PieAddItemDialog extends Dialog implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_add_item);
+
         bt_cancel=findViewById(R.id.dialog_bt_cancel);
         bt_confirm=findViewById(R.id.dialog_bt_confirm);
         inputNameText=findViewById(R.id.inputName);
@@ -107,11 +101,6 @@ public class PieAddItemDialog extends Dialog implements View.OnClickListener{
         bt_cancel.setOnClickListener(this);
         voice.setOnClickListener(voiceListenerForName);
         voice2.setOnClickListener(voiceListenerForNo);
-
-        ArrayAdapter<KdwExpCompanyEnum> companyAdapter = new ArrayAdapter<KdwExpCompanyEnum>(getContext(), R.layout.item_spinner_company, KdwExpCompanyEnum.values());
-        spCompany.setAdapter(companyAdapter);
-
-
     }
 
     //重写onClick方法
@@ -127,13 +116,24 @@ public class PieAddItemDialog extends Dialog implements View.OnClickListener{
 
                 String markName = inputNameText.getText().toString().trim();
                 String expNumber = convertString( inputExpNoText.getText().toString().trim());
-
-                // TODO: 2022/8/23
-                String companyCode = "";
+                String companyName = spCompany.getSelectedItem().toString();
+                String companyCode;
+                KdwExpCompanyEnum companyEnum = KdwExpCompanyEnum.Companion.fromString(companyName);
+                if(companyEnum != null){
+                    companyCode = companyEnum.getCompanyCode();
+                } else {
+                    ToastUtils.showLong("请选择正确的快递公司");
+                    return;
+                }
 
                 //默认备注名
                 if(TextUtils.isEmpty(markName)){
                     markName = getContext().getResources().getString((R.string.unNamedItem));
+                }
+
+                if(TextUtils.isEmpty(companyCode)){
+                    ToastUtils.showLong("请选择快递公司");
+                    return;
                 }
 
                 new Thread(new Runnable(){
@@ -151,7 +151,6 @@ public class PieAddItemDialog extends Dialog implements View.OnClickListener{
                                 public void onError(Throwable throwable) {
                                     super.onError(throwable);
                                     ToastUtils.showLong("添加失败");
-
                                     confirmListener.onConfirm(false);
                                 }
                             });
@@ -181,6 +180,10 @@ public class PieAddItemDialog extends Dialog implements View.OnClickListener{
             buf.append(upStr.charAt(i));
         }
         return   buf.toString();
+    }
+
+    public void setEditViewText(int editViewName,String s){
+        inputNameText.setText(s);
     }
 
 }

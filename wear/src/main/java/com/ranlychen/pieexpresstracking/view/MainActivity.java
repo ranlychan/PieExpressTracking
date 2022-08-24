@@ -2,14 +2,8 @@ package com.ranlychen.pieexpresstracking.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,31 +14,25 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.listener.OnItemLongClickListener;
-import com.mobvoi.android.speech.SpeechRecognitionApi;
 import com.ranlychen.pieexpresstracking.BaseSpeechActivity;
+import com.ranlychen.pieexpresstracking.R;
 import com.ranlychen.pieexpresstracking.adapter.KdwPackageInfoAdapter;
-import com.ranlychen.pieexpresstracking.entity.KdnPackageItem;
 import com.ranlychen.pieexpresstracking.entity.KdwRespBean;
 import com.ranlychen.pieexpresstracking.entity.PiePackageItem;
 import com.ranlychen.pieexpresstracking.network.AbsRxSubscriber;
 import com.ranlychen.pieexpresstracking.service.PackageService;
-import com.ranlychen.pieexpresstracking.utils.DataIOUtil;
-import com.ranlychen.pieexpresstracking.utils.KdnJsonReaderUtil;
-import com.ranlychen.pieexpresstracking.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends BaseSpeechActivity {
 
-    KdnPackageItem[] kdnPackageItems;
 
-    View headView;
-    View footView;
-    Intent aboutpage;
-    Intent dialog;
+    private View headView;
+    private View footView;
+    private Intent aboutpage;
+    private PieAddItemDialog additem;
+    private int editviewname;
 
     /**new**/
     private RecyclerView rvPackageList;
@@ -113,19 +101,18 @@ public class MainActivity extends BaseSpeechActivity {
      * 不用监听器实现按钮点击事件监听
      * 添加快递信息按钮
      */
-    AddItemDialog additem;
-    int editviewname;
     public void footadd(View v) {
-        additem = new AddItemDialog(MainActivity.this);
-        additem.setCancel(new AddItemDialog.IOnCancelListener() {
+        additem = new PieAddItemDialog(MainActivity.this);
+        additem.setCancel(new PieAddItemDialog.IOnCancelListener() {
             @Override
-            public void onCancel(AddItemDialog dialog) {
+            public void onCancel(PieAddItemDialog dialog) {
                 Toast.makeText(MainActivity.this,getString(R.string.addfail),Toast.LENGTH_SHORT).show();
             }
         });
-        additem.setConfirm(new AddItemDialog.IOnConfirmListener() {
+        additem.setConfirm(new PieAddItemDialog.IOnConfirmListener() {
             @Override
-            public void onConfirm(int state) {
+            public void onConfirm(boolean isSuccess) {
+
             }
         });
         additem.setVoiceListenerForName(new View.OnClickListener() {
