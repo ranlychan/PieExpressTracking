@@ -39,6 +39,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal">
 
                         <EditText
@@ -54,14 +55,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right|center_vertical"
+                            android:layout_weight="1"
                             android:src="@drawable/ic_speak"
-                            app:circle_radius="20dp"/>
+                            app:circle_radius="20dp" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal">
 
                         <EditText
