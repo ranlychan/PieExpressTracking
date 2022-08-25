@@ -49,7 +49,7 @@
 
 ## 接口介绍 ##
 
-项目使用快递鸟的即时查询API免费版。内容来自快递鸟API文档 [免费查询快递接口 物流即时查询API-快递鸟 (kdniao.com)](http://www.kdniao.com/api-track)
+分支release_1.2.2发布的v1.2.2版本使用快递鸟的即时查询API免费版。内容来自快递鸟API文档 [免费查询快递接口 物流即时查询API-快递鸟 (kdniao.com)](http://www.kdniao.com/api-track)
 
 ### 即时查询请求 ###
 
