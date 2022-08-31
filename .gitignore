@@ -7,3 +7,15 @@
 /captures
 .externalNativeBuild
 .cxx
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+build/
+.idea
+/.idea/caches/build_file_checksums.ser
+/app/seeds.txt
+/app/mapping.txt
+/mobile/src/generated/debug/
+/mobile/src/generated/release/
+/wear/src/generated/release/
+/wear/src/generated/debug/
