@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -13,6 +12,12 @@ android {
         // viewBinding = true
     }
 
+    //支持kotlin
+    kotlinOptions {
+        jvmTarget = '1.8'
+        useIR = true
+    }
+
     defaultConfig {
         applicationId 'com.ranlychen.PieExpressTracking'
         minSdkVersion 28
@@ -23,7 +28,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -31,6 +36,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+//    signingConfigs {
+//        release {
+//            storeFile file("")
+//        }
+//    }
 }
 
 def dbflow_version = "5.0.0-alpha2"
@@ -97,5 +107,4 @@ dependencies {
     // adds generated content provider annotations + support.
     implementation "com.github.agrosner.dbflow:contentprovider:${dbflow_version}"
 
-    wearApp project(":wear")
 }
