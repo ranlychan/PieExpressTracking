@@ -1,6 +1,5 @@
-# 派查查 ：一个WearOS智能手表系统上的快递查询应用 #
+# 派查查 ：一个WearOS智能手表系统上的快递查询应用  ![GitHub release (latest by date)](https://img.shields.io/github/v/release/ranlychan/PieExpressTracking) ![GitHub all releases](https://img.shields.io/github/downloads/ranlychan/PieExpressTracking/total) 
 
-[toc]
 
 ## 前言 ##
 
