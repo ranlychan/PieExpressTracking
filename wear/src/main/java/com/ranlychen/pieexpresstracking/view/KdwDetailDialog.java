@@ -129,6 +129,7 @@ public class KdwDetailDialog extends Dialog implements View.OnClickListener {
                             @Override
                             public void onNext(PiePackageItemBean<KdwRespBean> kdwRespBeanPiePackageItemBean) {
 
+                                item = kdwRespBeanPiePackageItemBean;
                                 LocalPackageDataService.updateKdwPackageData(item.getLocalInfoBean(), new AbsRxSubscriber<Boolean>() {
                                     @Override
                                     public void onNext(Boolean aBoolean) {
